@@ -1,0 +1,9 @@
+/.idea
+/vcs.xml
+/admin/runtime/
+/web/runtime/
+/agent/runtime/
+/tp/runtime/
+/mobile/runtime/
+/float/runtime/
+/access/upload/

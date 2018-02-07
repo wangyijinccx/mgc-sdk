@@ -1,0 +1,109 @@
+@charset "utf-8";
+html{font-size:100%; margin:0; padding:0}
+body{background:#FFF; line-height:180%; margin:0; padding:0}
+h1,p,img,select,input{padding:0; margin:0; list-style:none; vertical-align:middle}
+a{text-decoration:none}
+
+body {margin:0; padding:0;width:100%;font: 14px/20px Microsoft YaHei;color: #333;font-family:'Microsoft YaHei', SimSun, 'Segoe UI', Tahoma, Helvetica, Sans-Serif;background:#f7f7f7}
+*{margin:0; padding:0;}
+
+
+.Global{width:640px; overflow:hidden; margin:auto;}
+.Global .Banner{width:640px; height:790px; background:url(../Images/Banner.png) no-repeat; position:relative; z-index:-1;}
+.Global .Banner .ArrowDown{display:block; text-align:center; width:100%; padding-bottom:23px; position:absolute; left:0; bottom:170px; z-index:7}
+.Global .Banner .ArrowDown .Anim{margin-left:-14px; position:absolute; top:0; left:50%}
+.Global .Banner .ArrowDown .Anim img{width:26px}
+.Global .Banner .ArrowDown .Text{font-size:18px; font-family:"微软雅黑"; color:#FFF; line-height:20px}
+
+.Global .Content{padding-top:0px;margin-top: 300px; background:url(../Images/Bj.png); overflow:hidden; top:0px; z-index:11; position:absolute; width:640px; padding-bottom:40px;}
+.Global .Content .Title{width:517px; overflow:hidden; height:90px; margin:auto; margin-top:30px; margin-bottom:25px;}
+.Global .Content .Title img{width:517px; height:90px;}
+.Global .Content .Pic{width:527px; overflow:hidden; margin:auto;}
+
+.Anim{margin-top:-35px; animation:anim1 3s infinite;  -moz-animation:anim1 3s infinite; /* Firefox */ -webkit-animation:anim1 3s infinite; /* Safari and Chrome */ -o-animation:anim1 3s infinite; /* Opera */} 
+
+.Global .Nva{width:640px; height:108px; background:rgba(0,0,0,0.50); position:fixed; top:0px; z-index:999;}
+.Global .Nva .gameName{width:280px; margin-left:20px; padding-top:14px; padding-bottom:14px; float:left;}
+.Global .Nva .gameName img{width:80px; height:80px; float:left; margin-right:15px;}
+.Global .Nva .gameName H1{font-size:26px; color:#fff; margin-top:10px; font-weight:normal;}
+.Global .Nva .gameName H1 p{color:#fff; font-size:20px; font-weight:normal; margin-top:18px;}
+.Global .Nva .gameName H1 p em{background:url(../Images/EmX.png); padding-left:18px; line-height:18px; padding-right:1px; margin-right:5px; height:18px; overflow:hidden; display:inline-flex;}
+.Global .Nva #msg_1,.Global .Nva #msg_2{width:110px; height:50px; margin-top:28px; font-size:20px; color:#fff; line-height:50px; float:right; margin-right:20px;}
+.Global .Nva #msg_1 a{display:block; border-radius:5px; background:#ff9125; color:#fff; line-height:50px; font-size:20px; text-align:center;}
+
+
+@keyframes anim1
+{
+0%   {margin-top:-35px; opacity:1}
+25%  {margin-top:-20px; opacity:0.8}
+50%  {margin-top:-35px; opacity:1}
+75%  {margin-top:-20px; opacity:0.8}
+100% {margin-top:-35px; opacity:1}
+}
+@-moz-keyframes anim1
+{
+0%   {margin-top:-35px; opacity:1}
+25%  {margin-top:-20px; opacity:0.8}
+50%  {margin-top:-35px; opacity:1}
+75%  {margin-top:-20px; opacity:0.8}
+100% {margin-top:-35px; opacity:1}
+}
+@-webkit-keyframes anim1
+{
+0%   {margin-top:-35px; opacity:1}
+25%  {margin-top:-20px; opacity:0.8}
+50%  {margin-top:-35px; opacity:1}
+75%  {margin-top:-20px; opacity:0.8}
+100% {margin-top:-35px; opacity:1}
+}
+@-o-keyframes anim1
+{
+0%   {margin-top:-35px; opacity:1}
+25%  {margin-top:-20px; opacity:0.8}
+50%  {margin-top:-35px; opacity:1}
+75%  {margin-top:-20px; opacity:0.8}
+100% {margin-top:-35px; opacity:1}
+}
+
+#mask {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,.6);
+    position: fixed;
+    background: url("../image/wx.png") no-repeat 83% 84%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+
+
+.certificate {
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 108px;
+    height: 200px;
+    background-color: rgba(255,255,255,.6);
+}
+.certificate > h2 {
+    width: 100%;
+    text-align: center;
+    height: 80px;
+    font-size: 30px;
+    line-height: 80px;
+}
+.certificate > div {
+    height: 100px;
+    font-size: 30px;
+    width: 400px;
+    margin:0 auto;
+    border:#FD862A dashed 1px;
+    text-align: center;
+    line-height: 100px;
+    background-color: #F8F8F8;
+}
+
+
+

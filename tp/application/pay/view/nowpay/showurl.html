@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html >
+<head lang="en" >
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <meta charset="UTF-8" >
+    <title >支付状态</title >
+    <link rel="stylesheet" href="/public/mobile/css/payment.css" />
+</head >
+<body>
+<br><br><br><br>
+<div class="account_information" >
+    <p class="balance" style="text-align:center">亲，您已退出支付，请点击关闭按钮关闭！</p >
+</div >
+<!--客服QQ-->
+<footer class="footer" >
+    {neq  name="return_token" value=""}
+    <a href="{$return_token}" style="width:50px" >关闭</a >
+    {else/}
+    <a onclick="huosdk.closeWeb()" style="width:50px" >关闭</a >
+    {/neq}
+</footer >
+</body >
+<script language='javascript' >
+        var return_token = '{$return_token}';
+        if (return_token.length > 1) {
+            window.location = return_token
+        }else{
+            window.huosdk.closeWeb();
+        }
+</script >
+</body >
+<script src="/public/mobile/js/payment.js" ></script >
+<script src="/public/mobile/js/fastclick.js" ></script >
+</html >

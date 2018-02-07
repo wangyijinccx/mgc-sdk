@@ -1,0 +1,52 @@
+﻿<admintpl file="header" />
+</head>
+<body class="J_scroll_fixed" >
+<div class="wrap js-check-wrap" >
+    <ul class="nav nav-tabs" >
+         <if condition="($from eq 'iossw') ">
+        <li ><a href="{:U('IosGame/iosindex')}" >游戏列表</a ></li >
+             <else />
+        <li ><a href="{:U('IosGame/index')}" >游戏列表</a ></li >
+           </if>
+        <li class="active" ><a href="#" >添加达标等级</a ></li >
+    </ul >
+    <div class="common-form" >
+        <form method="post" class="form-horizontal js-ajax-form" action="{:U('IosGame/addstandard_level_post')}" >
+            <fieldset >
+                <div class="control-group" >
+                    <label class="control-label" >游戏:</label >
+                    <div class="controls" >
+                        <label class="control-label" style="text-align:left" >{$games.name}</label >
+                    </div >
+                </div >
+
+                <input id="appid" name="appid" type="hidden" value="{$games.id}" >
+                <input   name="from" type="hidden" value="{$from}" >
+
+                <div class="control-group" >
+                    <label class="control-label" >达标等级:</label >
+                    <div class="controls" >
+                        <textarea name="standard_level" rows="3" cols="60" style="resize:none;width:40%;"
+                                  placeholder="请输入达标等级" >{$games.standard_level}</textarea >
+                    </div >
+
+                </div >
+
+            </fieldset >
+            <div class="form-actions" >
+                <button type="submit"
+                        class="btn btn-primary btn_submit js-ajax-submit" >添加
+                </button >
+                 <if condition="($from eq 'iossw') ">
+                <a class="btn" href="{:U('Sdk/IosGame/iosindex')}" >返回</a >
+                 <else />
+                <a class="btn" href="{:U('Sdk/IosGame/index')}" >返回</a >
+                 </if>
+            </div >
+        </form >
+    </div >
+</div >
+<script src="__PUBLIC__/js/common.js" ></script >
+
+</body >
+</html>

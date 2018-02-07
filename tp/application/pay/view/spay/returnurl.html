@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html >
+<head lang="en" >
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <meta charset="UTF-8" >
+    <title >支付状态</title >
+    <link rel="stylesheet" href="/public/mobile/css/payment.css" />
+</head >
+<body >
+<br ><br ><br ><br >
+<div class="account_information" >
+    <p class="balance" style="text-align:center" >{$msg} </p >
+</div >
+<!--客服QQ-->
+<footer class="footer" >
+    <a id="back_game" href="{$return_token}" onclick="" style="width:50px" >返回</a >
+</footer >
+</body >
+<script language='javascript' >
+     var nowtoken = '{$return_token}';
+     var order_id = '{$info.order_id}';
+     if (nowtoken.length > 1) {
+         window.location = nowtoken;
+     } else {
+         document.getElementById("back_game").setAttribute('href', "javascript:;");
+         document.getElementById("back_game").setAttribute('onclick',"huosdk_payNotify_all('" + order_id + "');");
+         setTimeout("huosdk_payNotify_all('{$info.order_id}')", 10);
+     }
+     function huosdk_payNotify_all(order_id) {
+         if (order_id == 'aa') {
+             huosdk_backgame(order_id);
+         } else {
+             huosdk_payNotify(order_id);
+         }
+     }
+
+
+</script >
+<script src="/public/mobile/js/payment.js" ></script >
+<script src="/public/mobile/js/fastclick.js" ></script >
+</html >

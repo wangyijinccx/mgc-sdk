@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://mini.9csy.com/reg/wjgz/2666 -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+<meta name="format-detection" content="telephone=no">
+<meta content="width=640" name="viewport">
+<title>
+	{$game_record.gamename} -官方安卓账号注册
+</title>
+<!--<script src="js/jquery-1.8.3.js"></script>-->
+<script src="__PUBLIC__/agent/reg/js/jquery-1.8.3.js" charset="utf-8" ></script >
+<link href="__PUBLIC__/agent/reg/css/GlobalNew.Css?1321312323211233" rel="stylesheet" type="text/css">
+<script src="__PUBLIC__/agent/reg/js/jquery.min.js"></script>
+<script src="__PUBLIC__/3rd/layer/layer.js" ></script >
+
+<script>
+		function checkNumOrLetter(value) {
+		    var regx = /^[A-Za-z0-9]*$/;
+		    if (regx.test(value)) {
+		        return true;
+			}
+			return false;
+		}
+        $(function () {
+          if (4 != {$game_record.classify}) {
+            $(".Register").hide();            
+          }
+        });
+        function CheckValue() {
+            if ($("#txt_UserName").val() == "请输入帐号" || $("#txt_UserName").val() == "") {
+                return "请输入帐号";
+            }
+            else if ($("#txt_Pwd").val() == "请输入密码" || $("#txt_Pwd").val() == "") {
+                return "请输入密码";
+            }
+            else if ($("#txt_Pwd2").val() == "请确认密码" || $("#txt_Pwd2").val() == "") {
+                return "请确认密码";
+            }
+            else if ($("#txt_Pwd").val() != $("#txt_Pwd2").val()) {
+                return "确认密码与密码不一致";
+            } else if (!checkNumOrLetter($("#txt_UserName").val())) {
+                return "账号由数字、字母组成";
+			}
+            else {
+                return "1";
+            }
+        }
+        function Register() {
+            if (CheckValue() != "1") {
+                alert(CheckValue());
+            }
+            else {
+				var url = $('#post_url').val();
+				var gamename = $('#game_name').val();
+                $.ajax({
+                    url: url,
+                    type: "POST",
+					data: $("#post_form").serialize(),
+                    beforeSend: function () {
+                        $(".Button_B1 > a").attr("disabled", "disabled");
+                        $(".Button_B1").css("background", "#666");
+                        $(".Button_B1 > a").text("正在注册...");
+                    },
+                    success: function (data) {
+                        if (data.error == 0) {
+							alert("恭喜您注册成功!");
+							//location.href = "/agent.php/Front/Reg/to_download/name/"+gamename;
+                            //location.href = "/Download/" + $("#hid_GameName").val() + "/4/";
+                            //new TipBox({ type: 'success', str: '恭喜您注册成功', hasBtn: true });
+                        }
+                        else {
+							alert(data.msg);
+                            //new TipBox({ type: 'error', str: _data[1], hasBtn: true });
+                            $(".Button_B1 > a").removeAttr("disabled");
+                            $(".Button_B1").css("background", "#ff8a2c");
+                            $(".Button_B1 > a").text("立即注册");
+                        }
+                    },
+                    complete: function () {
+                    },
+                    error: function () {
+                        alert("出错了");
+                    }
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="Global">
+	<div class="Nva">
+		<div class="GameIcon">
+			<img src="{$game_record.icon}" id="form1" width="80" height="80">
+		</div>
+		<div class="GameName">
+			<p class="Font">
+				{$game_record.gamename}
+			</p>
+			<p>
+				游戏类型：{$game_record.cates}
+			</p>
+		</div>
+		<div class="Download">
+			<a href="{$game_record.downurl}"><img src="__PUBLIC__/agent/reg/image/Download.png" alt=""></a>
+		</div>
+	</div>
+	<!--<div class="BannerBj" style="background:url(__PUBLIC__/agent/reg/image/RegBannerBj.jpg) #fff no-repeat;">-->
+	<img src="{$game_record.bgthumb}" style="margin-top: 150px; width: 100%; height: auto;" />
+	<div class="Register">
+		<form method="post" id="post_form">
+			<div class="input_signup active">
+				<input type="hidden" name="game_name" id="game_name" value="{$Think.get.name}">
+				<input type="hidden" name="post_url" id="post_url" value="{:U('reg_do')}">
+				<div style="border:2px solid #283c60; background:#000c24; width: 100%; height: 60px;">
+					<span style="color:#00deff; padding-left: 16px; font-size: 28px;">玩家账号</span>
+					<input type="text" class="input" id="txt_UserName" name="username" placeholder="由数字、字母组成">
+				</div>
+				<div style="margin-top: 20px; border:2px solid #283c60; background:#000c24; width: 100%; height: 60px;">
+					<span style="color:#00deff; padding-left: 16px; font-size: 28px;">玩家密码</span>
+					<input type="password" class="input" id="txt_Pwd" name="password" placeholder="密码">
+				</div>
+				<div style="margin-top: 20px; border:2px solid #283c60; background:#000c24; width: 100%; height: 60px;">
+					<span style="color:#00deff; padding-left: 16px; font-size: 28px;">重复密码</span>
+					<input class="input" id="txt_Pwd2" type="password" aria-label="密码" placeholder="重复密码">
+				</div>
+				<input type="button" id="submit" style="width:100%; height: 80px; background-color: #2363dd; margin-top: 30px; color: white; font-size: 34px;" name="button" value="立即注册" onclick="Register()">
+			</div>
+		</form>
+	</div>
+</div>
+<!--<div style="position: static; width: 0px; height: 0px; border: none; padding: 0px; margin: 0px;">
+	<div id="trans-tooltip">
+		<div id="tip-left-top" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-left-top.png);">
+		</div>
+		<div id="tip-top" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-top.png) repeat-x;">
+		</div>
+		<div id="tip-right-top" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-right-top.png);">
+		</div>
+		<div id="tip-right" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-right.png) repeat-y;">
+		</div>
+		<div id="tip-right-bottom" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-right-bottom.png);">
+		</div>
+		<div id="tip-bottom" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-bottom.png) repeat-x;">
+		</div>
+		<div id="tip-left-bottom" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-left-bottom.png);">
+		</div>
+		<div id="tip-left" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-left.png);">
+		</div>
+		<div id="trans-content">
+		</div>
+	</div>
+	<div id="tip-arrow-bottom" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-arrow-bottom.png);">
+	</div>
+	<div id="tip-arrow-top" style="background: url(chrome-extension://ikkepelhgbcgmhhmcmpfkjmchccjblkd/imgs/map/tip-arrow-top.png);">
+	</div>
+</div>-->
+</body>
+</html>

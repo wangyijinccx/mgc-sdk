@@ -1,0 +1,51 @@
+﻿@charset"utf-8"; /*CSSDocument*/body{margin-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; font-size:12px; /*font-family:Arial; */font-family:'MicrosoftYaHei'; background-color:#ffd7ec;}
+p,ul,li,dd,dl,dt,ol,h1,h2,h3,h4,h5,h6,em{list-style:none; padding:0px; margin:0px; font-weight:normal; font-style:normal; font-size:24px;}
+a:link{font-size:12px; color:#333333; text-decoration:none;}
+a:visited{font-size:12px; color:#333333; text-decoration:none;}
+a:active{font-size:12px; color:#333333; text-decoration:none;}
+a:hover{font-size:12px; color:#333333;}
+img{border:0px;}
+/*-------------------尾部-------------------*/
+.Global{width:720px; margin:0 auto; overflow:hidden;}
+.Global .Banner{max-width:638px;margin-left:40px; height:680px; overflow:hidden; position:relative;}
+.Global .Bj{width:720px; height:90px; margin-top:-80px; overflow:hidden; background:url(../image/Bj.png) no-repeat; position:absolute;}
+
+.Global .NieRong{width:720px; overflow:hidden; position:absolute; margin-top:30px;}
+
+.Global .NieRong .BiaoTi{width:680px; height:40px; padding-left:40px;}
+
+.Global .NieRong .Input_Box{width:638px; margin-left:40px; margin-left:40px; margin-top:15px; border:1px solid #eaeaea; background-color:#ffffff; overflow:hidden; height:240px; -moz-border-radius:5px;  -webkit-border-radius:5px; border-radius:5px;}
+.Global .NieRong .Input_Box ul{ height:244px;}
+.Global .NieRong .Input_Box ul li{height:80px; border-bottom:1px solid #eaeaea;}
+.Global .NieRong .Input_Box ul li Input{border:0px none; background:none; height:80px; line-height:80px; width:538px; padding-left:60px; padding-right:10px; color:#c1c1c1; font-size:20px;font-family:'Microsoft YaHei', SimSun, 'Segoe UI', Tahoma, Helvetica, Sans-Serif;}
+.Global .NieRong .Input_Box ul li Input:hover{color:#999999;}
+.Global .NieRong .Input_Box .Input_B1{background:url(../image/icone.png) 15px 25px no-repeat;}
+.Global .NieRong .Input_Box .Input_B2{background:url(../image/icone.png) 14px -45px no-repeat;}
+.Global .NieRong .BiaoDan{width:644px; height:72px; margin:auto; margin-top:20px; margin-bottom:20px;}
+.Global .NieRong .BiaoDan .Input_AnNiu{width:644px; height:72px; background:url(../image/AnNiu.png) no-repeat; border:0px none;}
+.ToLoad{ text-align: center; margin-bottom:25px;}
+
+.JieTu{width:680px; height:40px; padding-left:40px;}
+.JietuPic{overflow:hidden; width:720px; text-align:center; margin-top:15px; margin-bottom:15px;}
+.JietuPic > div {
+    width: 310px;
+    height: 310px;
+    margin: 20px;
+    float: left;
+}
+.JietuPic > div > img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+#mask {
+    width: 100%;
+    height:100%;
+    background-color: rgba(0,0,0,.6);
+    position: fixed;
+    background: url("../image/wx.png") no-repeat 83% 84%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+

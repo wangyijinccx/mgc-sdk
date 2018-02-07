@@ -1,0 +1,130 @@
+<admintpl file="header" />
+<style >
+    .select2-container .select2-dropdown {
+        z-index: 99999999;
+    }
+</style >
+</head>
+<body class="J_scroll_fixed" >
+<div class="wrap js-check-wrap" >
+    <ul class="nav nav-tabs" >
+        <li class="active" ><a href="{:U('Sdk/Cp/index')}" >CP列表</a ></li >
+    </ul >
+
+
+
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/share.css" />
+    <div class='funcs' >
+        <a class='btn btn-success add_game_btn' href="javascript:;" >添加CP</a >
+    </div >
+
+    <form class="js-ajax-form" action="" method="post" >
+        <table class="table table-hover table-bordered table-list" >
+            <thead >
+            <tr >
+                <th width=50 >CPID</th >
+                <th width=150 >CP名称</th >
+                <th width=50 >联系人</th >
+                <th width=50 >联系电话</th >
+                <th width=100 >职位</th >
+                <th width=150 >创建时间</th >
+                <th width=150 >修改时间</th >
+                <th width=150 >操作</th >
+            </tr >
+            </thead >
+            <foreach name="cp_data" item="vo" >
+                <tr >
+                    <td >{$vo.id}</td >
+                    <td >{$vo.company_name}</td >
+                    <td >{$vo.contacter}</td >
+                    <td >{$vo.mobile}</td >
+                    <td >{$vo.position}</td >
+                    <td >20{$vo.create_time|date="y-m-d H:i:s",###}</td >
+                    <td >20{$vo.update_time|date="y-m-d H:i:s",###}</td >
+                    <td >
+                        <a href="{:U('Cp/deleteCP',array('cp_id'=>$vo['id']))}" >删除 </a >
+                        |
+                        <a href="{:U('Cp/editCp',array('cp_id'=>$vo['id']))}" >编辑 </a >
+
+
+                    </td >
+
+
+                </tr >
+            </foreach >
+        </table >
+        <div class="pagination" >{$Page}</div >
+
+    </form >
+</div >
+
+<div class="pop_up_form_div container" id='add_game' style="display:none;" >
+    <div class="row" >
+        <div class="col-md-4" >CP名称</div >
+        <div class="col-md-8" >
+            <input type="text" name="company_name" />
+        </div >
+        <div class="col-md-4" >联系人</div >
+        <div class="col-md-8" >
+            <input type="text" name="contacter" />
+        </div >
+        <div class="col-md-4" >联系电话</div >
+        <div class="col-md-8" >
+            <input type="text" name="mobile" />
+        </div >
+        <div class="col-md-4" >职位</div >
+        <div class="col-md-8" >
+            <input type="text" name="position" />
+        </div >
+
+
+    </div >
+
+    <div class="row" style="margin-top:20px;" >
+        <button class="btn btn-success pop_up_form_submit_btn" id='agent_submit_btn' >确认</button >
+    </div >
+</div >
+<script >
+    $(".add_game_btn").click(function () {
+        layer.open({
+            type   : 1,
+            shift  : 2,
+            area   : '350px',
+            title  : "添加CP",
+            content: $('#add_game'),
+            cancel : function (index) {
+                layer.close(index);
+            }
+        });
+    });
+
+    $(".pop_up_form_submit_btn").click(function () {
+        var url      = "{:U('Sdk/Cp/addPost')}";
+        var company_name     = $("input[name='company_name']").val();
+        var contacter = $("input[name='contacter']").val();
+        var mobile = $("input[name='mobile']").val();
+        var position = $("input[name='position']").val();
+        var data     = {"company_name": company_name,
+                         "contacter": contacter,
+                         "mobile": mobile,
+                         "position": position
+                };
+        $.post(url, data, function (res) {
+            if (res.error == "0") {
+                yxalert(res.msg);
+            } else if (res.error == "1") {
+                yxalert(res.msg);
+                reload_delay();
+            }
+        })
+    });
+</script >
+
+<script src="__PUBLIC__/js/common.js" ></script >
+
+<script src="__PUBLIC__/share/clipboard/clipboard.min.js" ></script >
+<script src="__PUBLIC__/share/clipboard/clipboard.js" ></script >
+<link href="__PUBLIC__/share/clipboard/clipboard.css" rel="stylesheet" type="text/css" >
+
+</body >
+</html>

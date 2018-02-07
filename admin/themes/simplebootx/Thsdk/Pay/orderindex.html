@@ -1,0 +1,146 @@
+﻿<admintpl file="header" />
+</head>
+<body class="J_scroll_fixed" >
+<div class="wrap js-check-wrap" >
+    <form class="well form-search" method="get" action="{:U('Thsdk/Pay/orderindex')}" >
+        <div class="search_type cc mb10" >
+            <div class="mb10" >
+					<span class="mr20" >
+					订单号： 
+					<input type="text" name="orderid" style="width: 150px;" value="{$formget.orderid}"
+                           placeholder="请输入订单号..." >
+					&nbsp;&nbsp; &nbsp;&nbsp; 
+
+					游戏：
+					<select class="select_2" name="gid" id="selected_id" style="width: 200px;" >
+                        <foreach name="games" key="k" item="vo" >
+                            <php >$gid_select=$k==$formget['gid'] ?"selected":"";</php >
+                            <option value="{$k}" {$gid_select} >{$vo.gamename}</option >
+                        </foreach >
+                    </select >
+                    区服：
+                        <select class="select_3" name="server_id" style="width: 200px;" >
+                       <foreach name="servers" key="k" item="vo" >
+                            <php >$server_select=$vo['ser_code']==$formget['server_id'] ?"selected":"";</php >
+                            <option value="{$vo.ser_code}" {$server_select} >{$vo.ser_name}</option >
+                        </foreach >
+                    </select >
+					 充值账号： 
+					<input type="text" name="username"
+                           style="width: 150px;" value="{$formget.username}"
+                           placeholder="请输入账号..." >
+						
+					<br >
+
+					</span >
+						
+					<span >
+                                            <br >
+
+					回调状态 
+					<select class="select_2" name="cpstatus" style="width: 200px;" id="selected_id" >
+                        <foreach name="cpstatuss" key="k" item="vo" >
+                            <php >$ps_select=$k==$formget['cpstatus'] ?"selected":"";</php >
+                            <option value="{$k}" {$ps_select} >{$vo}</option >
+                        </foreach >
+                    </select >
+					&nbsp;&nbsp;    <br >  <br >
+
+				时间：
+					<input type="text" name="start_time"
+                           class="js-date" value="{$formget.start_time|default=''}" placeholder="开始时间..."
+                           style="width: 100px;" autocomplete="off" >
+					- 
+					<input type="text" class="js-date" name="end_time" placeholder="时间..."
+                           value="{$formget.end_time}" style="width: 100px;"
+                           autocomplete="off" > &nbsp; &nbsp;
+					</span >
+
+                <input type="submit" name='submit' class="btn btn-warning" value="今日" />
+                <input type="submit" name='submit' class="btn btn-warning" value="昨日" />
+                &nbsp; &nbsp;
+                <input type="submit" name='submit' class="btn btn-warning" value="本周" />
+                <input type="submit" name='submit' class="btn btn-warning" value="上周" />
+                &nbsp; &nbsp;
+                <input type="submit" name='submit' class="btn btn-warning" value="本月" />
+                <input type="submit" name='submit' class="btn btn-warning" value="上月" />
+                &nbsp; &nbsp;
+                <input type="submit" name='submit' class="btn btn-primary" id='search_btn_default' value="搜索" />
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <?php echo \Huosdk\UI\Pieces::export_excel(); ?>
+                <!--<a href="{:U('Data/Pay/export')}" class="btn btn-success" style='float:right;'>导出数据为EXCEL文件</a>-->
+            </div >
+        </div >
+    </form >
+    <form class="js-ajax-form" action="" method="post" >
+        <table class="table table-hover table-bordered table-list" >
+            <thead >
+            <tr >
+                <th >订单号</th >
+                <th >支付时间</th >
+                <th >账号</th >
+                <th >游戏</th >
+                <th >游戏区服</th >
+                <th >金额</th >
+
+                <th >实收金额</th >
+
+
+                <th >支付状态</th >
+                <!--<th>回调状态</th>-->
+                <th >回调状态</th >
+            </tr >
+            </thead >
+
+            <tr >
+                <th style='color:#FF0000' >汇总</th >
+                <th style='color:#FF0000' >--</th >
+                <th style='color:#FF0000' >--</th >
+                <th style='color:#FF0000' >--</th >
+                <th style='color:#FF0000' >--</th >
+                <th style='color:#FF0000' >{$sums}</th >
+                <th style='color:#FF0000' >{$realsum}</th >
+
+                <th style='color:#FF0000' >--</th >
+                <th style='color:#FF0000' >--</th >
+                <!--<th style='color:#f00'>--</th>-->
+                <!--<th style='color:#f00'>--</th>-->
+            </tr >
+
+            <foreach name="orders" item="vo" >
+                <tr >
+                    <td >{$vo.order_id}</td >
+                    <td >{$vo.pay_time|date='Y-m-d H:i:s',###}</td >
+
+                    <td >{$vo.username}</td >
+                    <td >{$vo.gamename}</td >
+                    <td >{$vo.server_name}</td >
+                    <td >{$vo.amount}</td >
+                    <td >{$vo.amount}</td >
+                    <td > <span style='color:#FF0000' >成功</span></td >
+                    <td >
+                        <if condition=" 1 eq $vo.status " >
+                            <span style='color:#FF0000' >通知成功</span >
+                            <elseif condition=" 2 eq $vo.status " />
+                            <span style='color:#0000FF' >通知失败</span >
+                            <else />
+                            <span style='color:#000000' >未通知cp</span >
+                        </if >
+                    </td >
+
+            </foreach >
+
+        </table >
+        <div class="pagination" >{$Page}</div >
+        <div >共{$total_rows}条记录</div >
+
+    </form >
+</div >
+<script src="__PUBLIC__/js/common.js" ></script >
+<script >
+    $(".form-search select").change(function () {
+        $("#search_btn_default").click();
+    });
+</script >
+</body >
+</html>

@@ -1,0 +1,47 @@
+<admintpl file="header" />
+<style type="text/css" >
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+</style >
+</head>
+<body >
+<div class="wrap js-check-wrap" >
+    <form action="{:U('Cp/editPost')}" method="post"
+          class="form-horizontal js-ajax-forms" enctype="multipart/form-data" >
+        <div class="row-fluid" >
+
+                <table class="table table-bordered"  style="width:40%" >
+                    <tr >
+                        <th >CP名称</th >
+                        <td > <input type="text" name="company_name" value="{$cp_data.company_name}" ></td >
+                        <input type="hidden" name="cp_id" value="{$cp_data.id}" >
+                    </tr >
+                    <tr >
+                        <th >联系人</th >
+                        <td > <input type="text" name="contacter" value="{$cp_data.contacter}" ></td >
+                    </tr >
+                    <tr >
+                        <th >联系电话</th >
+                        <td > <input type="text" name="mobile" value="{$cp_data.mobile}" ></td >
+                    </tr >
+                    <tr >
+                        <th >职位</th >
+                        <td > <input type="text" name="position" value="{$cp_data.position}" ></td >
+                    </tr >
+        </table>
+        <div class="form-actions" >
+            <button class="btn btn-primary js-ajax-submit" type="submit" >提交</button >
+            <a class="btn" href="javascript:history.back(-1);" >返回</a >
+        </div >
+        </div>
+    </form >
+</div >
+
+<script type="text/javascript" >
+    $(function () {
+        $("th").width("30%");
+    });
+</script >
+</body >
+</html>

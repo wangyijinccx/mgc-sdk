@@ -1,0 +1,63 @@
+﻿html{min-height:100%; _height:100%; height:100%;}
+body{margin:0px; font-family:'Microsoft YaHei'; background:#000000;}
+p, ul, li, dd, dl, dt, ol, h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, em{list-style:none; padding:0px; margin:0px; font-weight:normal; font-style:normal;}
+i{font-style:normal}
+a{color:#fff;}
+a:link{text-decoration:none;}
+a:visited{COLOR:#707070; TEXT-DECORATION:none; text-decoration:none;}
+a:active{color:#707070; text-decoration:none;}
+a:hover{color:#ff585b; transition:all ease-in-out .6s; -o-transition:all ease-in-out .6s; -ms-transition:all ease-in-out .6s; -moz-transition:all ease-in-out .6s; -webkit-transition:all ease-in-out .6s;}
+li:hover{color:#ff585b; transition:all ease-in-out .6s; -o-transition:all ease-in-out .6s; -ms-transition:all ease-in-out .6s; -moz-transition:all ease-in-out .6s; -webkit-transition:all ease-in-out .6s;}
+a:hover img{transition:all ease-in-out .6s; -o-transition:all ease-in-out .6s; -ms-transition:all ease-in-out .6s; -moz-transition:all ease-in-out .6s; -webkit-transition:all ease-in-out .6s;}
+FORM{padding:0px; margin:0px;}
+img{border:0px;}
+
+.Global{width:100%; overflow:hidden; margin:auto;}
+.Nva{width:100%; padding-left:34px; padding-right: 0px; position:fixed; z-index:999; height: 150px; background:#000000;}
+.Nva .GameIcon{width:100px; height:100px; float:left; margin-right:15px; margin-top: 25px;}
+.Nva .GameIcon img{width:100px; height:100px;}
+.Nva .GameName{padding-top: 15px; width:310px; font-size:24px; color:#fff; margin-top: 25px; float:left;}
+.Nva .GameName .Font{font-size:36px;}
+.Nva .GameName p span{color:#ffd847; font-size: 24px; padding-left:20px;}
+.Nva .Download{width:32.5%; height:auto; float:right; margin-top: 29px; position: fixed; right: 0%;}
+
+
+.BannerBj{width:100%; height: auto; margin-top:150px; }
+
+.Register {position: fixed; bottom: 44px; margin: 0 auto; left: 0px; right: 0px; width:544px; height:330px; color:#ff0; font-size:24px; z-index: 999;}
+.Register .Header{width:284px; height:53px; background:url(../image/Header.png) no-repeat; margin:auto; padding-bottom:30px;}
+.Register input{border:none; outline:medium; color: #cfa360; font-size: 28px; background-color:transparent; width:350px; padding-left:10px; padding-right:10px; margin-bottom:5px; height:55px; line-height:55px; font-size:20px; font-family:"微软雅黑";}
+.Register .hint{font-size:22px; text-align:right; padding-right:10px; margin-bottom:15px; /*visibility:hidden;*/}
+.Register .wrong{border-color:#fff;}
+.Register .hint_wrong{color:#EA5A70;}
+input[type=submit],.Register .button{display:block; margin:0 auto; line-height:20px; font-size:28px; no-repeat; width:154px; height:55px; border:0px; line-height:170px; overflow:hidden;}
+
+.Banner{width:640px; height:430px; overflow:hidden;}
+
+.Package{width:561px; height:720px; margin:auto;}
+.Pic{width:598px; height:247px; margin:auto;}
+.Pic1{width:499px; height:555px; margin:auto;}
+.XiaZai{width:640px; height:226px;}
+
+.Package > div {
+    width: 250px;
+    height: 300px;
+    background-color: red;
+    margin: 15px;
+    float: left;
+}
+.Package > div > img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+#mask {
+    width: 100%;
+    height:100%;
+    background-color: rgba(0,0,0,.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: none;
+}

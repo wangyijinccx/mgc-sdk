@@ -1,0 +1,52 @@
+<?php
+return array(
+    'app'       => 'Admin',
+    'model'     => 'Thsak',
+    'action'    => 'default',
+    'data'      => '',
+    'type'      => '1',
+    'status'    => '1',
+    'name'      => '第三方sdk',
+    'icon'      => '',
+    'remark'    => '',
+    'listorder' => '1',
+    'children'  =>
+        array(
+            array(
+                'app'       => 'Thsdk',
+                'model'     => 'Member',
+                'action'    => 'index',
+                'data'      => '',
+                'type'      => '1',
+                'status'    => '1',
+                'name'      => '第三方玩家信息列表',
+                'icon'      => '',
+                'remark'    => '',
+                'listorder' => '0',
+            ),
+            array(
+                'app'       => 'Thsdk',
+                'model'     => 'PlayerRole',
+                'action'    => 'index',
+                'data'      => '',
+                'type'      => '1',
+                'status'    => '1',
+                'name'      => '玩家角色',
+                'icon'      => '',
+                'remark'    => '',
+                'listorder' => '0',
+            ),
+            array(
+                'app'       => 'Thsdk',
+                'model'     => 'Pay',
+                'action'    => 'orderindex',
+                'data'      => '',
+                'type'      => '1',
+                'status'    => '1',
+                'name'      => '渠道数据',
+                'icon'      => '',
+                'remark'    => '',
+                'listorder' => '0',
+            )
+        ),
+);

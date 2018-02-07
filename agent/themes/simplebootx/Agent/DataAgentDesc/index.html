@@ -1,0 +1,177 @@
+<agenttpl file="user_center_header" />
+<section >
+    <div class="user_center main" >
+        <div class="banner_1" >
+
+        </div >
+        <div class="user_center_main page-content" >
+            <agenttpl file="share/side" />
+            <style >
+                #queryForm .row {
+                    margin: 10px 0;
+                    width: 960px;
+                }
+
+                #queryForm .row input {
+                    /*width:150px;*/
+                }
+            </style >
+
+            <div class="page-right my-game query-records" >
+                <form class="form-inline" role="form" id="queryForm" action="{:U('Agent/DataAgentDesc/index')}"
+                      method="get" >
+                    <div class="input-content" style="height:120px;" >
+                        <div class="container " style="width:960px;" >
+                            <div class="row" >
+
+                            </div >
+                            <div class="row" >
+                                <div class="col-xs-4" >
+                                    <div class="input-group" >
+                                        <span class="input-group-addon" >平台</span >
+                                        <select name='spread' class='form-control' id="spread_list" >
+                                            <option value='0' >请选择平台</option >
+                                            <option value='1' >九九乐动</option >
+                                        </select >
+                                    </div >
+                                </div >
+                                <div class="col-xs-4" >
+                                    <div class="input-group" >
+                                        <span class="input-group-addon" >游戏</span >
+                                        <select name='game' class='form-control' id="game_list" >
+                                            <option value='0' >请选择游戏</option >
+
+                                        </select >
+                                    </div >
+                                </div >
+                                <div class="col-xs-4" >
+                                    <div class="input-group" >
+                                        <span class="input-group-addon" >分区</span >
+                                        <select name='server' class='form-control' id="server_list" >
+                                            <option value='0' >查询分区</option >
+                                        </select >
+                                    </div >
+                                </div >
+                                <div class="col-xs-6" >
+                                    <div class="input-group" >
+                                        <span class="input-group-addon" >注册时间    </span >
+                                        <input class="form-control" id="stime" name="start_time" type="text"
+                                               value="{$formget.start_time}" style="width:120px;"
+                                               placeholder="开始时间"
+                                               onclick="WdatePicker({startDate: '%y-%M-%d 00:00:00', dateFmt: 'yyyy-MM-dd'})" >
+                                        <input class="form-control" id="etime" name="end_time" type="text"
+                                               value="{$formget.end_time}" style="width:120px;"
+                                               placeholder="结束时间"
+                                               onclick="WdatePicker({startDate: '%y-%M-%d 00:00:00', dateFmt: 'yyyy-MM-dd'})" >
+                                    </div >
+
+                                </div >
+
+                                <div class='col-xs-2' >
+                                    <button class="btn btn-success" id="search-btn" >搜&nbsp;索</button >
+                                </div >
+                                <div class='col-xs-1' >
+                                    <input type="submit" name="submit" value="导出数据" class="btn btn-success" />
+                                </div >
+                            </div >
+                        </div >
+                    </div >
+                </form >
+                <div class="search-results" >
+
+                    <div class="results-header" >
+                        <span class="game-num" >共找到<i >{$n}</i >个记录</span >
+                        <i class="fa fa-info-circle" id="payway_tips" ></i >
+                    </div >
+                    <div class="table-content registration-details" >
+                        <table class="table table-hover table-bordered" >
+                            <tbody >
+                            <tr >
+                                <th >渠道</th >
+                                <th >游戏 账号</th >
+                                <th >设备 编号</th >
+                                <th >注册IP</th >
+                                <th >平台</th >
+                                <th >游戏</th >
+                                <th >分区</th >
+                                <th >游戏 角色</th >
+                                <th >角色创建时间</th >
+                            </tr >
+                            <volist name='items' id='vo' >
+                                <tr >
+                                    <td >{$vo.agent_name}</td >
+                                    <td >{$vo.mem_name}</td >
+                                    <td style="max-width: 180px; word-wrap: break-word" >{$vo.device_info}</td >
+                                    <td >{$vo.register_ip}</td >
+                                    <td >九九乐动</td >
+                                    <td >{$vo.game_name}</td >
+                                    <td >{$vo.server_name}</td >
+                                    <td >{$vo.role_name}</td >
+                                    <td >{$vo.register_time|date="Y-m-d H:i:s",###}</td >
+                                </tr >
+                            </volist >
+                            </tbody >
+                        </table >
+                        <div class="page" style="" >
+                            <div class="paging" >{$page}</div >
+                        </div >
+                    </div >
+                </div >
+            </div >
+        </div >
+    </div >
+</section >
+
+<!--页脚-->
+<agenttpl file="footer" />
+<script src="__PUBLIC__/agent/My97DatePicker/WdatePicker.js" ></script >
+<script >
+    $(document).ready(function () {
+        var spreadSelected = "<?php   if($formget['spread']!=0){ echo $formget['spread'];}else{ echo '0';}?>";
+        var gameSelected   = "<?php   if($formget['game']!=0){ echo $formget['game'];}else{ echo '0';}?>";
+        var serverSelected = "<?php   if(isset($formget['server'])){ echo $formget['server'];}else{ echo '0';}?>";
+        var game_string    = '';
+        var server_string  = '';
+
+//            $('#game_list').find('option').eq(gameSelected).attr("selected", "selected").click();
+
+        $("#spread_list").live('click', function () {
+                var spread = $(this).val();
+                $.post("{:U('Agent/Game/get_game')}", {spread_id: spread}, function (res) {
+                    game_string = '';
+                    $.each(res.data, function (i, n) {
+                        game_string += "<option value=" + n.id + ' >' + n.name + '<\/option >';
+                    });
+                    $("#game_list").html("<option value='0' >请选择游戏</option >" + game_string);
+                    if (gameSelected != 0) {
+
+                        $("#game_list option[value=" + gameSelected + "]").attr("selected", "selected").click();
+                    }
+                }, 'json');
+            }
+        );
+        $("#spread_list option[value=" + spreadSelected + "]").attr("selected", "selected").click();
+
+        $("#game_list").live('click', function () {
+                var game = $(this).val();
+
+                $.post("{:U('Agent/Game/get_server')}", {game_id: game}, function (res) {
+                    server_string = '';
+                    $.each(res.data, function (i, n) {
+                        server_string += "<option value=" + n.ser_name + ' >' + n.ser_name + '<\/option >';
+                    });
+                    $("#server_list").html("<option value='0' >查询分区</option >" + server_string);
+                    if (serverSelected != 0) {
+
+                        $("#server_list option[value=" + serverSelected + "]").attr("selected", "selected");
+                    }
+
+                }, 'json');
+            }
+        );
+
+    })
+
+</script >
+
+

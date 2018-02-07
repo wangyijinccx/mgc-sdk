@@ -1,0 +1,55 @@
+<html >
+<head >
+    <title >title</title >
+    <script src="__PUBLIC__/agent/js/jquery-1.7.2.min.js" ></script >
+    <link rel="stylesheet" href="/public/simpleboot/font-awesome/4.2.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/public/3rd/bootstrap/css/bootstrap.min.css" />
+    <script src="__PUBLIC__/3rd/bootstrap/js/bootstrap.min.js" ></script >
+
+    <link rel="stylesheet" href="__PUBLIC__/share/paging.css" />
+
+</head >
+<body >
+<div class="container" style="margin-top:20px;" >
+    <table class="table table-hover table-bordered" >
+        <tr >
+            <th width="50" >mem_id</th >
+            <th width="50" >账号</th >
+            <th width="50" >渠道类型</th >
+            <th width="50" >渠道名称</th >
+            <th width="50" >设备编号</th >
+            <th width="50" >注册IP</th >
+            <th width="50" >游戏</th >
+            <th width="50" >账号注册时间</th >
+        </tr >
+        <volist name="members" id="vo" >
+            <tr class="even" >
+                <td >{$vo.id}</td >
+                <td >{$vo.username}</td >
+                <td>
+                    <eq name="vo[type_extend]" value="0" >
+                        买量
+                        <else />
+                        军团
+                    </eq >
+                </td>
+                <td >{$vo.user_nicename}</td >
+                <td >{$vo.imei}</td >
+                <td >{$vo.regist_ip}</td >
+                <td >{$vo.name}</td >
+                <td >
+                    <notempty name="vo.reg_time" >
+                        <?php echo date("Y-m-d H:i:s",$vo['reg_time']); ?>
+                    </notempty >
+                </td >
+            </tr >
+        </volist >
+    </table >
+</div >
+<div class="container paging" >
+    {$page}
+</div >
+
+</body >
+</html >
+

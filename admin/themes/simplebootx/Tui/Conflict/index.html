@@ -1,0 +1,70 @@
+<admintpl file="header" />
+
+</head>
+<body class="J_scroll_fixed" >
+<div class="wrap js-check-wrap" >
+    <ul class="nav nav-tabs" >
+        <li class="active" ><a href="#" target="_self" >冲突列表</a ></li >
+    </ul >
+
+    <form class="js-ajax-form" action="" method="get" onsubmit="return false;" >
+        <table class="table table-hover table-bordered table-list" >
+            <thead >
+            <tr >
+                <th width="50" >mem_id</th >
+                <th width="50" >账号</th >
+                <th width="50" >渠道类型</th >
+                <th width="50" >渠道名称</th >
+                <th width="50" >设备编号</th >
+                <th width="50" >注册IP</th >
+                <th width="50" >游戏</th >
+                <th width="50" >账号注册时间</th >
+                <th width="50" >操作</th >
+            </tr >
+            </thead >
+            <volist name="members" id="vo" >
+                <tr class="even" >
+                    <td >{$vo.id}</td >
+                    <td >{$vo.username}</td >
+                    <td>
+                        <eq name="vo[type_extend]" value="0" >
+                            买量
+                            <else />
+                            军团
+                        </eq >
+                    </td>
+                    <td >{$vo.user_nicename}</td >
+                    <td >{$vo.imei}</td >
+                    <td >{$vo.regist_ip}</td >
+                    <td >{$vo.name}</td >
+                    <td >
+                        <notempty name="vo.reg_time" >
+                            <?php echo date("Y-m-d H:i:s",$vo['reg_time']); ?>
+                        </notempty >
+                    </td >
+                    <td>
+                        <a href="javascript:openConflictList({$vo.id});">查询</a>
+                    </td>
+                </tr >
+            </volist >
+        </table >
+        <div class="pagination" >{$page}</div >
+    </form >
+</div >
+<script src="__PUBLIC__/js/common.js" ></script >
+</body >
+<script>
+function openConflictList(mem_id) {
+   layer.open({
+        shift     : 7,
+        type      : 2,
+        title     : '冲突列表',
+        shadeClose: true,
+        shade     : 0.2,
+        area      : ['850px', '60%'],
+        content   : '{:U("Tui/Conflict/conflict")}?mem_id=' + mem_id //iframe的url
+    });
+}
+</script>
+
+</html>

@@ -1,0 +1,191 @@
+<mobiletpl file="header" />
+<style >
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background-color: #EEEEEE;
+    }
+
+    .venify-content {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .venify-header {
+        height: 50px;
+        background-color: #3F4042;
+    }
+
+    .venify-header > h3 {
+        color: #FFFFFF;
+        font-weight: 500;
+        text-align: center;
+        line-height: 50px;
+    }
+
+    .venify-msg {
+        height: 165px;
+    }
+
+    .venify-msg > .venify-msg-content {
+        background-color: #FFFFFF;
+        padding: 4% 4%;
+    }
+
+    .venify-msg > .venify-msg-content > p, span {
+        margin: 7px 0;
+        font-size: 12px;
+        color: #9F9F9F;
+    }
+
+    .venify-msg > .venify-msg-content > span {
+        display: block;
+        padding-left: 2em;
+        margin: 7px 0 12px 0;
+    }
+
+    .venify-msg > .venify-msg-content > div {
+        background-color: #EEEEEE;
+    }
+
+    .venify-msg > .venify-msg-content > div > ul {
+        \ text-align: center;
+        margin: 0 auto;
+        width: 58%;
+        list-style: none;
+        color: #9F9F9F;
+        margin: 0 auto;
+        font-size: 14px;
+        padding: 17px 0;
+    }
+
+    .venify-msg > .venify-msg-content > div > ul > li {
+        text-align: center;
+        font-size: 12px;
+    }
+
+    .venify-msg > .venify-msg-content > div > ul > li:before {
+        content: '●';
+        color: #F98230;
+        padding: 0 5px 0 0;
+
+    }
+
+    .venify-form {
+        padding: 4% 4%;
+        background-color: #FFFFFF;
+    }
+
+    .venify-form > div {
+        position: relative;
+        box-sizing: border-box;
+        background-color: #FFFFFF;
+    }
+
+    .venify-form > div > span {
+        position: absolute;
+        margin: 0;
+        left: 7%;
+        top: 13px;
+        height: 25px;
+        width: 25px;
+        background-image: url(__PUBLIC__/mobile/images/card.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .venify-form > div > .user-icon {
+        background-image: url(__PUBLIC__/mobile/images/user.png);
+    }
+
+    .venify-form > div > input {
+        border: none;
+        outline: none;
+        height: 50px;
+        width: 88%;
+        text-indent: 3em;
+        margin: 0 6%;
+        border-bottom: 1px solid #DDDDDD;
+    }
+
+    .venify-form > .btn_submit {
+        background-color: #F98230;
+        border-radius: 7px;
+        color: #F0FFFF;
+        width: 88%;
+        height: 40px;
+        border: none;
+        font-size: 16px;
+        margin: 20px 6%;
+    }
+
+    .submitss {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 15px 20px;
+        background-color: #EBEBEB;
+    }
+
+    .submitss > button {
+        width: 100%;
+        height: 40px;
+        letter-spacing: 2px;
+        padding: 0px;
+        background: #DAA414;
+        border: 1px solid #C6C6C6;
+        border-radius: 5px;
+        font-size: 14px;
+        color: #EBEBEB;
+    }
+
+    .error_box {
+        text-align: center;
+        height: 30px;
+        line-height: 30px;
+        font-size: 15px;
+        color: #FF0000;
+    }
+</style >
+</head >
+
+<body >
+<div class="venify-content" >
+    <div class="venify-msg" >
+        <div class="venify-msg-content" >
+            <p >尊敬的用户:</p >
+            <span >根据国家规定，游戏用户需要进行实名认证。</span >
+            <div >
+                <ul >
+                    <li >信息仅用于认证且绝对保密</li >
+                    <li >未成年不允许在游戏内支付</li >
+                </ul >
+            </div >
+        </div >
+    </div >
+    <input type="hidden" value="{$userdata['id']}" id="mem_id" >
+    <input type="hidden" value="{$userdata['idcard']}" id="oldidcard" >
+    <input type="hidden" value="{:U('Mobile/Indentify/set')}" id="ajaxUrl" >
+    <div class="venify-form" >
+        <div >
+            <span class="user-icon" ></span >
+            <input type="text" name="realname" id="realname" value="{$userdata['truename']}" placeholder="请输入真实姓名" />
+        </div >
+        <div >
+            <span class="number-icon" ></span >
+            <input type="text" name="idcard" id="idcard" value="{$userdata['showidcard']}" placeholder="请输入您的身份证号" />
+        </div >
+        <div class="error_box" ></div >
+        <div class="submitss" id="submitss" >
+            <button >提交</button >
+        </div >
+    </div >
+</div >
+<script src="__PUBLIC__/mobile/js/jquery.js" ></script >
+<script src="__PUBLIC__/mobile/js/huosdk_base.js" ></script >
+<script src="__PUBLIC__/mobile/js/identify.js" ></script >
+</body >
+</html >

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://mini.9csy.com/reg/xhdqsjs/2666 -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+<title>
+	{$game_record.gamename}-官方IOS账号注册
+</title>
+<script src="__PUBLIC__/agent/reg/js/jquery-1.8.3.js" charset="utf-8" ></script >
+<link href="__PUBLIC__/agent/reg/css/Register_syxx.Css?123111112" rel="stylesheet" type="text/css">
+<meta content="width=640" name="viewport">
+
+<script>
+		//判断是否是微信浏览器
+		function isWeiXin(){
+			var ua = window.navigator.userAgent.toLowerCase();
+			if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+				 
+				return true;
+			}else{
+				return false;
+			}
+		}
+			
+
+        function CheckValue() {
+            if ($("#txt_UserName").val() == "请输入帐号" || $("#txt_UserName").val() == "") {
+                return "请输入帐号";
+            }
+            else if ($("#txt_Pwd").val() == "请输入密码" || $("#txt_Pwd").val() == "") {
+                return "请输入密码";
+            }
+            else if ($("#txt_Pwd2").val() == "请确认密码" || $("#txt_Pwd2").val() == "") {
+                return "请确认密码";
+            }
+            else if ($("#txt_Pwd").val() != $("#txt_Pwd2").val()) {
+                return "确认密码与密码不一致";
+            }
+            else {
+                return "1";
+            }
+        }
+        function Register() {
+            if (CheckValue() != "1") {
+                alert(CheckValue());
+            }
+            else {
+				var url = $('#post_url').val();
+				var gamename = $('#game_name').val();
+                $.ajax({
+                    url: url,
+                    type: "POST",
+					data:$("#form1").serialize(), 
+                    beforeSend: function () {
+                        $(".Button_B1 > a").attr("disabled", "disabled");
+                        $(".Button_B1").css("background", "#666");
+                        $(".Button_B1 > a").text("正在注册...");
+                    },
+					
+                    success: function (data) {
+                        if (data.error == 0) {
+                            alert("恭喜您注册成功!");
+                            location.href = "/agent.php/Front/Reg/to_download/name/"+gamename;
+                            //new TipBox({ type: 'success', str: '恭喜您注册成功', hasBtn: true });
+                        }
+                        else {
+                            alert(data.msg);
+                            //new TipBox({ type: 'error', str: _data[1], hasBtn: true });
+                            $(".Button_B1 > a").removeAttr("disabled");
+                            $(".Button_B1").css("background", "#ff8a2c");
+                            $(".Button_B1 > a").text("立即注册");
+                        }
+                    },
+                    complete: function () {
+                    },
+                    error: function () {
+                        new TipBox({ type: 'error', str: '出错了!', hasBtn: true });
+                    }
+                });
+            }
+        }
+		
+		$(function(){ 
+		    if(isWeiXin()){
+				$("#mask").show();
+			}else{
+				$("#mask").hide();
+			}
+				
+		}); 
+    </script>
+</head>
+<body>
+<form method="post" action="" id="form1">
+	<input type="hidden" name="game_name" id="game_name" value="{$Think.get.name}">
+	<input type="hidden" name="post_url" id="post_url" value="{:U('reg_do')}">
+	<div class="Global">
+		<div class="Banner">
+			<img src="{$game_record.bgthumb}" id="img_Banner" width="720" height="680">
+		</div>
+		<div class="Bj">
+		</div>
+		<div class="NieRong">
+			<div class="BiaoTi">
+				<img src="__PUBLIC__/agent/reg/image/ZhuChe.png" width="613" height="40">
+			</div>
+			<!-- 输入框 -->
+			<div class="Input_Box">
+				<ul>
+					<li><input id="txt_UserName" type="text" class="Input_B1" name="username" placeholder="请输入会员帐号"></li>
+					<li><input id="txt_Pwd" name="password" type="password" class="Input_B2" placeholder="请输入密码"></li>
+					<li><input id="txt_Pwd2" name="password" type="password" class="Input_B2" placeholder="请重新输入密码"></li>
+				</ul>
+			</div>
+			<div class="BiaoDan">
+				<input class="Input_AnNiu" name="" type="button" onclick="Register()">
+			</div>
+			<div class="JieTu"><img src="__PUBLIC__/agent/reg/image/jietu.png" id="img_Jietu" width="538" height="40"></div>
+			<div class="JietuPic">
+				<foreach name="game_record.image_arr" item="vo">
+				<div>
+					<img src="{$vo.url}">
+				</div>
+				</foreach>
+				<!--<div>
+					<img src="" alt="" >
+				</div>
+				<div>
+					<img src="" alt="" >
+				</div>
+				<div>
+					<img src="" alt="" >
+				</div>
+				<div>
+					<img src="" alt="" >
+				</div>-->
+			</div>
+			<!--<div class="JieTu">
+				<img src="__PUBLIC__/agent/reg/image/jietu.png" id="img_Jietu" width="538" height="40">
+			</div>
+			<div class="JietuPic">
+				<img src="image/JIe.png" id="img_JIe" width="640" height="642">
+			</div>
+			<div class="JietuPic">
+				<img src="image/logo.png" width="432" height="58">
+			</div>-->
+		</div>
+	</div>
+</form>
+<div id="mask">
+    <img src="" alt="" >
+</div>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+
+.loading_wrap {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+}
+
+.loading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -45px;
+    margin-top: -45px;
+    width: 90px;
+    height: 90px;
+    background: url(../images/loading.png) no-repeat;
+    background-size: 360px 90px;
+}
+
+.loading.animate {
+    -webkit-animation: 0.6s animate_loading steps(4) infinite;
+}
+
+@-webkit-keyframes animate_loading {
+    0% {
+        background-position: 0 50%;
+    }
+    100% {
+        background-position: -360px 50%;
+    }
+}

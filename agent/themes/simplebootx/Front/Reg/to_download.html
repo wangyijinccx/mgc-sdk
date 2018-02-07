@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)http://mini.9csy.com/ToDownload.aspx?game=xhdqsjs -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+<title>首页</title>
+
+<script src="__PUBLIC__/agent/reg/js/jquery-1.8.3.js" charset="utf-8" ></script >
+<script language="JavaScript" type="text/JavaScript">
+
+
+//判断是否是微信浏览器
+    function isWeiXin(){
+        var ua = window.navigator.userAgent.toLowerCase();
+        if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+		     
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+function showhidediv(id){
+var age=document.getElementById("msg_2");
+var name=document.getElementById("msg_1");
+if (id == 'name') {
+   if (name.style.display=='none') {
+    age.style.display='none';
+    name.style.display='block';
+   }
+} else {
+   if (age.style.display=='none') {
+    name.style.display='none';
+    age.style.display='block';
+   }
+}   
+}
+
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+<meta name="format-detection" content="telephone=no">
+<meta content="width=640" name="viewport">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/agent/reg/css/Global.css?12321131">
+</head>
+<body rlt="1">
+   <div class="Global">
+		   <div class="Global">
+			   <div style="display:none;display: none;width: 100%; height: 100%;background:rgba(0,0,0,.8); position: fixed; left: 0; top: 0;z-index:10000"
+				 id="zhezhao" >
+				<img src='__PUBLIC__/wap/images/wx.png' style='width:100%' />
+			</div >
+   		<div class="Nva">
+        	<div class="gameName">
+            	<img src={$game_record.icon} id="imgIcon" width="80" height="80">
+                <h1>{$game_record.gamename}<p>游戏大小：{$game_record.gamesize}</p></h1>
+            </div>
+            <div id="msg_1" style="display:block;" onclick="showhidediv(&quot;age&quot;)" ;="">
+                 <a href="{$game_record.yiosurl}" id="photoTitle">免费下载</a> 
+            </div>
+            <div id="msg_2" style="display:none;">下载中...</div>
+		</div>
+        <div class="certificate">
+            <h2>安装完成后</h2>
+            <div class="btn-certificate" onclick="xinren()">
+                信任证书
+            </div>
+        </div>
+        <div class="Content">
+        	<div class="Title"><img src="__PUBLIC__/agent/reg/image/One.png" alt=""></div>
+            <div class="Pic"><img src="__PUBLIC__/agent/reg/image/OnePic.png" alt=""></div>
+            <div class="Title"><img src="__PUBLIC__/agent/reg/image/Two.png" alt=""></div>
+            <div class="Pic"><img src="__PUBLIC__/agent/reg/image/TwoPic.png" alt=""></div>
+            <div class="Title"><img src="__PUBLIC__/agent/reg/image/Three.png" alt=""></div>
+            <div class="Pic"><img src="__PUBLIC__/agent/reg/image/ThreePic.png" alt=""></div>
+            <div class="Title"><img src="__PUBLIC__/agent/reg/image/Four.png" alt=""></div>
+            <div class="Pic"><img src="__PUBLIC__/agent/reg/image/FourPic.png" alt=""></div>
+        </div>
+   </div>
+<div id="mask">
+    <img src="" alt="" >
+</div>
+
+
+
+</body></html>
+<script >
+		//var url = "{:DOWNIP}/embedded.mobileprovision";
+        //doLocation(url);
+        //setTimeout('trustlocate()', 1000);
+		 function doLocation(url) {
+            var uaa = navigator.userAgent.toLowerCase();
+            if (uaa.indexOf('micromessenger') > 0) {
+                $("#zhezhao").show();
+                $("#zhezhao").click(function () {
+                    $("#zhezhao").hide();
+                })
+            }
+            var a = document.createElement("a");
+
+            if (! a.click) {
+                window.location = url;
+                return;
+            }
+            a.setAttribute("href", url);
+            a.style.display = "none";
+            document.body.appendChild(a);
+            a.click();
+        }
+		
+		function xinren() {
+			var url = "https://dios72.huosdk.com/embedded.mobileprovision";
+			doLocation(url);
+			//setTimeout('trustlocate()', 1000);
+			/* window.location.href = "{:U('Game/trust')}"; */
+		}
+		
+		$(function(){ 
+		    if(isWeiXin()){
+				$("#mask").show();
+			}else{
+				$("#mask").hide();
+				document.getElementById("photoTitle").click();
+			}
+			 	
+		}); 
+	
+      
+</script >

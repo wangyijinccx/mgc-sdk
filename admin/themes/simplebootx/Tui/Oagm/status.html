@@ -1,0 +1,120 @@
+<!--
+ @time 2017-6-21 15:39:19
+ @author 古献浓
+-->
+
+<admintpl file="header" />
+<style >
+    #content, .edui-editor {
+        z-index: 1 !important;
+    }
+
+    #calroot {
+        z-index: 9999999 !important;
+    }
+</style >
+</head>
+<body >
+    <div class="wrap" >
+        <ul class="nav nav-tabs" >
+            <li ><a href="{:U('Tui/Oagm/first')}" >首充</a ></li >
+            <li ><a href="{:U('Tui/Oagm/foster')}" >扶植</a ></li >
+            <li class="active" ><a href="__SELF__" >审核</a ></li >
+        </ul >
+        <form id="popup_form" action="" onsubmit='return false;' method="post" class="form-horizontal js-ajax-form" >
+            <div class="row-fluid" >
+                <div class="span9" >
+                    <table class="table table-bordered" >
+                        <input type='hidden' name='id' value='{$from_data.id}' />
+                        <tr >
+                            <th width="80" >玩家角色名</th >
+                            <td >
+                                {$from_data.member_name}
+                            </td >
+                        </tr >
+                        <tr >
+                            <th width="80" >游戏名称</th >
+                            <td >
+                                {$from_data.game_name}
+                            </td >
+                        </tr >
+                         <tr >
+                            <th width="80" >游戏区服</th >
+                            <td >
+                                {$from_data.ser_code}
+                            </td >
+                        </tr >
+                        <tr >
+                            <th width="80" >申请金额</th >
+                            <td >
+                               {$from_data.money}元
+                            </td >
+                        </tr >
+                        <tr >
+                            <th width="80" >审核</th >
+                            <td ><if condition=" 1 eq $from_data.status " >
+                                 <input type="radio" name="status" value="1" checked="checked" />
+                                <else />
+                                  <input type="radio" name="status" value="1" />
+                                </if >待发放
+                           <if condition=" 2 eq $from_data.status " >
+                    <input type="radio" name="status" value="2" checked="checked" />
+                                <else />
+                    <input type="radio" name="status" value="2"  />
+                                </if >确认发放
+                                <if condition=" 3 eq $from_data.status " >
+                    <input type="radio" name="status" value="3" checked="checked" />
+                                    <else />
+                    <input type="radio" name="status" value="3" />
+                                    </if >拒绝发放
+                            </td >
+                        </tr >
+                        <tr >
+                            <th width="80" >审核备注</th >
+                            <td >
+                                <textarea name="reason"
+                                          style="width:500px;height:200px;" ></textarea >
+                            </td >
+                        </tr >
+                        <tr >
+                            <th width="80" >二级密码</th >
+                            <td >
+                                <input name="paypwd" type="password" />
+                            </td >
+                        </tr >
+                    </table >
+                </div >
+            </div >
+            <div class="form-actions" >
+                <button class="btn btn-primary " id="gm_log_submit_btn"
+                        type="button" >确认</button >
+                <a class="btn" id="go_back" href="{$from_data.back_url}" >{:L('BACK')}</a >
+            </div >
+        </form >
+    </div >
+    <script type="text/javascript" src="__PUBLIC__/js/common.js" ></script >
+>
+<script >
+
+var doajax = false;
+$("#gm_log_submit_btn").click(function () {
+    if (doajax) {
+        return false;
+    }
+    var url  = "{:U('Tui/Oagm/status')}";
+    var data = $("#popup_form").serialize();
+    doajax   = true;
+    $.post(url, data, function (res) {
+        if (res.error === '0') {
+            yxalert(res.msg);
+            window.location.href = $("#go_back").attr("href");
+        } else if (res.error === '1') {
+            yxalert(res.msg);
+            doajax = false;
+        }
+    });
+
+});
+</script >
+</body >
+</html>

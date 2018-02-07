@@ -1,0 +1,155 @@
+<admintpl file="header" />
+</head>
+<body class="J_scroll_fixed" >
+<div class="wrap js-check-wrap" >
+      <ul class="nav nav-tabs" >
+        <li ><a href="{:U('Tui/Oagm/first')}" target="_self" >首充列表</a ></li >
+        <li class="active" ><a href="{:U('Tui/Oagm/foster')}" target="_self" >扶植列表</a ></li >
+    </ul >
+    <form class="well form-search" method="get" action="" >
+        <div class="search_type cc mb10" >
+            <div class="mb10" >
+					<span class="mr20" >
+                        申请编号：
+					<input type="text" name="oa_gm_id" style="width: 150px;" value="{$formget.oa_gm_id}"
+                           placeholder="请输入首充号..." >
+					游戏：
+					<select class="select_2" name="game_id" id="selected_game_id" style="width: 200px;" >
+                        <foreach name="games" key="k" item="vo" >
+                            <php >$gid_select=$k==$formget['game_id'] ?"selected":"";</php >
+                            <option value="{$k}" {$game_id_select} >{$vo}</option >
+                        </foreach >
+                    </select >
+					 &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+					 扶植账号：
+					<input type="text" name="username"
+                           style="width: 150px;" value="{$formget.username}"
+                           placeholder="请输入玩家账号..." />
+					 申请人：
+					<input type="text" name="node_name"
+                           style="width: 150px;" value="{$formget.node_name}"
+                           placeholder="请输入申请人账号..." />
+
+					<br ><br >
+					 父渠道：
+                                         {$parent_agent_select_with_official}
+                        <!--<input type="text" name="parent_agentname" style="width: 150px;" value="{$formget.parent_agentname}" placeholder="请输入父渠道账号...">-->
+					 &nbsp;&nbsp;  &nbsp;&nbsp;
+                        <!--					 注册渠道号：
+                                            <input type="text" name="agentname" style="width: 150px;" value="{$formget.agentname}" placeholder="请输入注册渠道账号..."> -->
+
+					渠道名称 ：
+                                        {$agent_select_with_official}
+                        <!--<input type="text" name="agentnickname" style="width: 150px;" value="{$formget.agentnickname}" placeholder="请输入渠道名称...">-->
+					</span >
+
+					<span >
+                                            <br ><br >
+
+					处理状态：
+					<select class="select_2" name="status" style="width: 150px;" id="selected_status_id" >
+                        <foreach name="paystatuss" key="k" item="vo" >
+                            <php >$ps_select=$k==$formget['status'] ?"selected":"";</php >
+                            <option value="{$k}" {$ps_select} >{$vo}</option >
+                        </foreach >
+                    </select >
+					&nbsp;&nbsp;&nbsp;&nbsp;
+
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<br ><br >
+				时间：
+					<input type="text" name="start_time"
+                           class="js-date" value="{$formget.start_time|default=''}" placeholder="开始时间..."
+                           style="width: 100px;" autocomplete="off" >
+					-
+					<input type="text" class="js-date" name="end_time" placeholder="时间..."
+                           value="{$formget.end_time}" style="width: 100px;"
+                           autocomplete="off" > &nbsp; &nbsp;
+					</span >
+                &nbsp; &nbsp;
+                <input type="submit" name='submit' class="btn btn-primary" id='search_btn_default' value="搜索" />
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <?php echo \Huosdk\UI\Pieces::export_excel(); ?>
+                <!--<a href="{:U('Data/Pay/export')}" class="btn btn-success" style='float:right;'>导出数据为EXCEL文件</a>-->
+            </div >
+        </div >
+    </form >
+    <form class="js-ajax-form" action="" method="post" >
+        <table class="table table-hover table-bordered table-list" >
+            <thead >
+            <tr >
+                <th >申请编号</th >
+                <th >时间</th >
+                <th >账号</th >
+                <th >游戏</th >
+                <th >金额</th >
+                <th >申请人</th >
+                <!--<th>回调状态</th>-->
+                <th >状态</th >
+                <th >操作</th >
+            </tr >
+            </thead >
+
+            <tr >
+                <th style='color:#FF0000' >汇总</th >
+                <th style='color:#FF0000' >--</th >
+                <th style='color:#FF0000' >--</th >
+                <th style='color:#FF0000' >--</th >
+                <th style='color:#FF0000' >{$sums_money}</th >
+                <th style='color:#FF0000' >--</th >
+
+                <th style='color:#FF0000' >--</th >
+
+                <!--  <th style='color:#FF0000' >&#45;&#45;</th >-->
+                <!--<th style='color:#f00'>--</th>-->
+                <th style='color:#FF0000' >--</th >
+                <!--<th style='color:#f00'>--</th>-->
+            </tr >
+<php >$back_url=urlencode(U('Tui/Oagm/foster'));</php >
+            <foreach name="items" item="vo" >
+                <tr id="{$vo.oa_gm_id}" >
+                    <td class="oa_gm" >{$vo.oa_gm_id}</td >
+                    <td class="create_time" >{$vo.create_time|date='Y-m-d H:i:s',###}</td >
+                    <td class="username" >{$vo.username}</td >
+                    <td class="game_name" >{$vo.game_name}</td >
+                    <td class="money" >{$vo.money}</td >
+                    <td class="node_name" >{$vo['node_name']}</td >
+                    <td class="status" data-value="{$vo.status}" >
+                        <if condition=" 2 eq $vo.status " >
+                        <span style='color:#FF0000' >已发放</span >
+                        </if>
+                        <if condition=" $vo.status eq 3 " >
+                        <span style='color:#0000FF' >不发放</span >
+                                            </if>
+                          <if condition=" 1 eq $vo.status " >
+                        <span style='color:#000000' >待发放</span >
+                                            </if>
+                    </td >
+
+                    <td >
+                     <if condition=" 1 eq $vo.status " >
+                 <a href="{:U('Tui/Oagm/status',array('id'=>$vo['id'],'status'=>$vo['status'],'show_info'=>1,'back_url'=>$back_url))}"
+                    class="give_agent_coin_btn do_status_btn" data-id="{$vo.id}" >马上处理</a>
+                 <else/>
+                   <a href="javascript:;"
+                      class="give_agent_coin_btn do_status_btn" style="color:#333333;cursor:default; text-decoration:none;" data-id="{$vo.id}" >已处理</a>
+                  </if>
+                    </td >
+                </tr >
+            </foreach >
+
+        </table >
+        <div class="pagination" >{$Page}</div >
+        <div >共{$total_rows}条记录</div >
+
+    </form >
+</div >
+
+<script src="__PUBLIC__/js/common.js" ></script >
+<script >
+    $(".form-search select").change(function () {
+        $("#search_btn_default").click();
+    });
+</script >
+</body >
+</html>
